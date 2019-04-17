@@ -31,7 +31,7 @@ public class TrxApplication
             Arrays.sort(beanNames);
             for (String beanName : beanNames)
             {
-                System.out.println(beanName);
+//                System.out.println(beanName);
             }
         };
 

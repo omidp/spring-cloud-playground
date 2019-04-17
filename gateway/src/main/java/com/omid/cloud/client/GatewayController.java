@@ -2,19 +2,18 @@ package com.omid.cloud.client;
 
 import java.util.Map;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.ResponseEntity.BodyBuilder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cloud.omid.common.TrxVO;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 
 @RestController
@@ -51,10 +50,10 @@ public class GatewayController
 
     @GetMapping("/trxApi")
     @HystrixCommand(fallbackMethod = "fail")
-    public ResponseEntity<String> trxApi()
+    public ResponseEntity<TrxVO> trxApi()
     {
         log.info("ZUUL trxApi");
-        String test = trxProxy.test();
+        TrxVO test = trxProxy.test();
         log.info("msg {}", test);
         return ResponseEntity.ok(test);
     }

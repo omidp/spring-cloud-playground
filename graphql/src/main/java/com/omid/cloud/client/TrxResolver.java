@@ -8,6 +8,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.cloud.omid.common.TrxVO;
+
 import graphql.ErrorType;
 import graphql.GraphQLError;
 import graphql.execution.DataFetcherResult;
@@ -30,19 +32,19 @@ public class TrxResolver
     }
 
     @GraphQLQuery(name = "findTrxById")
-    public DataFetcherResult<String> findTrxById(@GraphQLArgument(name = "trxId") String trxId)
+    public DataFetcherResult<TrxVO> findTrxById(@GraphQLArgument(name = "trxId") String trxId)
     {
         log.info("Call TRX PROXY");
-        String test = trxProxy.test();
-        return new DataFetcherResult<String>(test, Arrays.asList(new GraphErr()));
+        TrxVO test = trxProxy.test();
+        return new DataFetcherResult<TrxVO>(test, Arrays.asList(new GraphErr()));
     }
     
     @GraphQLQuery(name = "findTrxByIdEx")
-    public DataFetcherResult<String> findTrxByIdEx(@GraphQLArgument(name = "trxId") String trxId)
+    public DataFetcherResult<TrxVO> findTrxByIdEx(@GraphQLArgument(name = "trxId") String trxId)
     {
         log.info("Call TRX PROXY");
-        String test = trxProxy.test();
-        return new DataFetcherResult<String>(test, Arrays.asList(new GraphErr("something bad happened")));
+        TrxVO test = trxProxy.test();
+        return new DataFetcherResult<TrxVO>(test, Arrays.asList(new GraphErr("something bad happened")));
     }
 
     public static class GraphErr implements GraphQLError
